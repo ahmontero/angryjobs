@@ -1,0 +1,25 @@
+{% load i18n webdesign %}
+
+<div class="page-header">
+  <h1>{% trans "Empresas" %} <small>{% trans "Ejemplo de calidad y confianza" %}</small></h1>
+</div>
+
+<div id="myCarousel" class="carousel slide">
+  <!-- Carousel items -->
+  <div class="carousel-inner">
+    {% for banner in banners %}
+        <div class="{% if forloop.first %}item active{% else %}item{% endif %}">
+          <img width="180" height="100" alt="" src="{{ banner.url}}"></img>
+        </div>
+    {% endfor %}
+  </div>
+
+  <!--
+    <div class="item"><img alt="" src="http://placehold.it/870x500"></img></div>
+    <div class="item"><img alt="" src="http://placehold.it/870x500"></img></div>
+  -->
+
+  <!-- Carousel nav -->
+  <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+  <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+</div>

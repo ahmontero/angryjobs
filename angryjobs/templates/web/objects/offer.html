@@ -1,0 +1,23 @@
+{% load i18n %}
+
+<tr data-id="{{ offer.id }}" data-url="{{ offer.link }}" style="cursor:pointer"
+rel="popover" data-original-title="{% trans "Oferta de Trabajo" %}"
+data-content="
+    <b>{{ offer.vacant|striptags|safe }}</b>
+    </br>
+    {{ offer.company.name|striptags|safe|capfirst }}
+    </br>
+    <span class='label label-{{ offer.css_class }}'>{{ offer.profile.name|striptags|safe }}</span>
+    {% if offer.company.shitty %}
+        <i class='icon icon-ok'></i>
+    {% endif %}
+    </br>
+    {% if offer.salary %} {{ offer.salary }} € {% endif %}
+">
+  <td>{{ offer.profile.name|safe|truncatewords:5 }}</td>
+  <td>{{ offer.date|safe|truncatewords:5 }}</td>
+  <td>{{ offer.vacant|safe|truncatewords:5 }}</td>
+  <td>{{ offer.company.name|safe|truncatewords:5|capfirst}}</td>
+  <td>{{ offer.poblation|safe|truncatewords:5|capfirst }}</td>
+  <td>{{ offer.number_of_comments }}</td>
+</tr>

@@ -1,0 +1,228 @@
+{% extends "ui/base.html" %}
+
+{% load i18n webdesign%}
+
+{% block title %}{% lorem 3 w random %}{% endblock %}
+
+{% block fixed_header %}
+
+  <div class="navbar-inner">
+    <div class="container-fluid">
+
+      <ul class="nav nav-pills ">
+          <li class="active"><a href="#">{% trans "Inicio" %}</a></li>
+          <li class=""><a href="#offers">{% trans "Ofertas de Trabajo" %}</a></li>
+          <!-- <li class=""><a href="#butchery">{% trans "Carniceras" %}</a></li> -->
+      </ul>
+
+      <div class="btn-group pull-right">
+        <ul class="nav nav-pills pull-right">
+            <li class="active"><a>{% trans "Hola" %} @{{ twitter_user.username }}</a></li>
+            <li class=""><a href="{% url web.logout %}">{% trans "Logout" %}</a></li>
+        </ul>
+      </div>
+
+      <!--
+      <div class="btn-group pull-right">
+          <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+            <i class="icon-user"></i> {% trans "Acceso candidat@s" %}
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="#">{% trans "Becari@ Analista" %}</a></li>
+            <li class="divider"></li>
+            <li><a href="#">{% trans "Craftman Wannabe" %}</a></li>
+            <li class="divider"></li>
+            <li><a href="#">{% trans "Smoke Sales" %}</a></li>
+          </ul>
+      </div>
+      -->
+
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block body_script%}
+  $('.carousel').carousel({interval: 5000});
+  $('#offers-list tbody tr').popover({'placement': 'top'});
+  $('#id_header_tooltip').tooltip();
+{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+
+      <header class="jumbotron masthead">
+        <div class="inner">
+          <h1>{% trans "Trabajo Enfurecido" %}</h1>
+          <p>{% trans "From CEO To Monkeys" %} &reg;</p> <!-- &copy; -->
+        </div>
+
+        <div class="bs-links">
+          <ul class="quick-links">
+            <li class="follow-btn">
+              <a href="https://twitter.com/trabajo_enfurec" class="twitter-follow-button" data-show-count="true" data-lang="es">Follow @trabajo_enfurec</a>
+            </li>
+            <li class="tweet-btn">
+              <a href="https://twitter.com/share" class="twitter-share-button" data-lang="es">Tweet</a>
+            </li>
+          </ul>
+        </div>
+      </header>
+
+    <div class="marketing">
+      <h1>{% trans "Uniendo sinergias colaborativas y corporativas con mono-sapiens" %}</h1>
+      <p class="marketing-byline">{% trans "¿Quieres un trabajo corporativo? No busques más." %} </p>
+
+      <div class="row">
+        {% for tip in first_row_tips %}
+          <div class="span4">  {{ tip.img.url }}
+            <img class="bs-icon" src="{{ STATIC_URL }}img/glyphicons/{{ tip.icon_name }}.png">
+            <h2 {% if tip.header_tooltip %}
+                  id="id_header_tooltip" rel="tooltip" title="{{ tip.header_tooltip }}"
+                {% endif %}>{{ tip.header }}</h2>
+            <p>{{ tip.body }}</p>
+          </div>
+        {% endfor %}
+      </div><!--/row-->
+      <div class="row">
+        {% for tip in second_row_tips %}
+          <div class="span4">
+            <img class="bs-icon" src="{{ STATIC_URL }}img/glyphicons/{{ tip.icon_name }}.png">
+            <h2 {% if tip.header_tooltip %}
+                  id="id_header_tooltip" rel="tooltip" title="{{ tip.header_tooltip }}"
+                {% endif %}>{{ tip.header }}</h2>
+            <p>{{ tip.body }}</p>
+          </div>
+        {% endfor %}
+      </div><!--/row-->
+      <div class="row">
+        {% for tip in third_row_tips %}
+          <div class="span4">
+            <img class="bs-icon" src="{{ STATIC_URL }}img/glyphicons/{{ tip.icon_name }}.png">
+            <h2 {% if tip.header_tooltip %}
+                  id="id_header_tooltip" rel="tooltip" title="{{ tip.header_tooltip }}"
+                {% endif %}>{{ tip.header }}</h2>
+            <p>{{ tip.body }}</p>
+          </div>
+        {% endfor %}
+      </div><!--/row-->
+
+    <hr class="soften">
+
+    {% for tw in twitter_timeline %}
+        {{ tw }}
+      {% endfor %}
+</div>
+
+<section id="offers">
+  <div class="row-fluid">
+    {% include "web/sections/offers.html" %}
+  </div>
+</section>
+
+<section id="butchery">
+  <div class="row-fluid">
+    {% include "web/sections/butchery.html" %}
+  </div>
+</section>
+
+    {% comment %}
+      <section id="orientation">
+        <div class="row-fluid">
+          {% include "web/sections/orientation.html" %}
+        </div
+      </section>
+
+      <section id="butcher">
+        <div class="row-fluid">
+          {% include "web/sections/butcher.html" %}
+        </div>
+      </section>
+
+
+      <div class="row-fluid">
+        <div class="span3">
+          <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+              <li class="nav-header">Sidebar</li>
+              <li class="active"><a href="#">Link</a></li>
+              <li><a href="#">Link</a></li>
+              <li><a href="#">Link</a></li>
+              <li><a href="#">Link</a></li>
+              <li class="nav-header">Sidebar</li>
+              <li><a href="#">Link</a></li>
+              <li><a href="#">Link</a></li>
+              <li><a href="#">Link</a></li>
+              <li><a href="#">Link</a></li>
+              <li><a href="#">Link</a></li>
+              <li><a href="#">Link</a></li>
+              <li class="nav-header">Sidebar</li>
+              <li><a href="#">Link</a></li>
+              <li><a href="#">Link</a></li>
+              <li><a href="#">Link</a></li>
+            </ul>
+          </div><!--/.well -->
+        </div><!--/span-->
+        <div class="span9">
+          <div class="hero-unit">
+            <h1>Hello, world!</h1>
+            <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+            <p><a class="btn btn-primary btn-large">Learn more »</a></p>
+          </div>
+
+          <div class="row-fluid">
+            <div class="span4">
+              <h2>Heading</h2>
+              <p>{% lorem 40 w random %}</p>
+              <p><a class="btn" href="#">View details »</a></p>
+            </div><!--/span-->
+            <div class="span4">
+              <h2>Heading</h2>
+              <p>{% lorem 40 w random %}</p>
+              <p><a class="btn" href="#">View details »</a></p>
+            </div><!--/span-->
+            <div class="span4">
+              <h2>Heading</h2>
+              <p>{% lorem 40 w random %}</p>
+              <p><a class="btn" href="#">View details »</a></p>
+            </div><!--/span-->
+          </div><!--/row-->
+          <div class="row-fluid">
+            <div class="span4">
+              <h2>Heading</h2>
+              <p>{% lorem 40 w random %}</p>
+              <p><a class="btn" href="#">View details »</a></p>
+            </div><!--/span-->
+            <div class="span4">
+              <h2>Heading</h2>
+              <p>{% lorem 40 w random %}</p>
+              <p><a class="btn" href="#">View details »</a></p>
+            </div><!--/span-->
+            <div class="span4">
+              <h2>Heading</h2>
+              <p>{% lorem 40 w random %}</p>
+              <p><a class="btn" href="#">View details »</a></p>
+            </div><!--/span-->
+          </div><!--/row-->
+        </div><!--/span-->
+      </div><!--/row-->
+
+{% endcomment %}
+
+{% endblock %}
+
+{% block footer %}
+  <p class="pull-right"><a href="#">{% trans "Arriba" %}</a></p>
+
+  <p>{% trans "Iconos cortesía de" %} <a href="http://glyphicons.com">Glyphicons Free</a>, {% trans "con licencia" %} <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
+
+  <p>{% trans "Recuerda: si después de ver esta página, no has esbozado ni una mísera sonrisa, es que formas parte de ellos :-)" %} </a>
+  </p>
+{% endblock %}
+
+
+{% block jquery_init %}
+
+{% endblock %}

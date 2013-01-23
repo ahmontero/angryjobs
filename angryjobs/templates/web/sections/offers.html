@@ -1,0 +1,70 @@
+{% load i18n webdesign %}
+
+<div class="page-header">
+  <h1>{% trans "Ofertas" %} <small>{% trans "Hay" %}  {{ offers_number }} {% trans " ofertas esperándote" %}</small></h1>
+</div>
+
+<table id="offers-list" class="table table-bordered">
+  <thead>
+
+      <tr>
+        <th>
+            {% trans "Perfil Ideal" %}
+            <a class="pull-right" href="?o=-profile#offers"><i class="icon icon-chevron-down"></i></a>
+            <a class="pull-right" href="?o=profile#offers"><i class="icon icon-chevron-up"></i></a>
+        </th>
+        <th>
+            {% trans "Fecha" %}
+            <a class="pull-right" href="?o=-date#offers"><i class="icon icon-chevron-down"></i></a>
+            <a class="pull-right" href="?o=date#offers"><i class="icon icon-chevron-up"></i></a>
+        </th>
+        <th>
+            {% trans "Oferta" %}
+            <a class="pull-right" href="?o=-vacant#offers"><i class="icon icon-chevron-down"></i></a>
+            <a class="pull-right" href="?o=vacant#offers"><i class="icon icon-chevron-up"></i></a>
+        </th>
+        <th>
+            {% trans "Compañía" %}
+            <a class="pull-right" href="?o=company#offers"><i class="icon icon-chevron-down"></i></a>
+            <a class="pull-right" href="?o=-company#offers"><i class="icon icon-chevron-up"></i></a>
+        </th>
+        <th>
+            {% trans "Población" %}
+            <a class="pull-right" href="?o=-poblation#offers"><i class="icon icon-chevron-down"></i></a>
+            <a class="pull-right" href="?o=poblation#offers"><i class="icon icon-chevron-up"></i></a>
+        </th>
+        <th>
+            {% trans "Comentarios" %}
+            <a class="pull-right" href="?o=-comments#offers"><i class="icon icon-chevron-down"></i></a>
+            <a class="pull-right" href="?o=comments#offers"><i class="icon icon-chevron-up"></i></a>
+        </th>
+      </tr>
+  </thead>
+  <tbody>
+    {% if offers > 0 %}
+      {% for offer in offers %}
+        {% include "web/objects/offer.html" %}
+      {% endfor %}
+    {% else %}
+      <h6>{% trans "No hay ninguna oferta >> La cosa está muy mala..." %}</h6>
+    {% endif %}
+  </tbody>
+</table>
+
+{% if is_paginated %}
+  <div id="offers-paginator" class="pull-right">
+    <ul class="pagination ">
+      {% if page_obj.has_previous %}
+        <li><a href="?o={{ order }}&page={{ page_obj.previous_page_number }}#offers">←</a></li>
+      {% else %}
+        <li class="disabled"><a>←</a></li>
+      {% endif %}
+
+      {% if page_obj.has_next %}
+        <li><a href="?o={{ order }}&page={{ page_obj.next_page_number }}#offers">→</a></li>
+      {% else %}
+        <li class="disabled"><a>→</a></li>
+      {% endif %}
+    </ul>
+  </div>
+{% endif %}

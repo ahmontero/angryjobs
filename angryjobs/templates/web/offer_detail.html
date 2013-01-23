@@ -1,0 +1,252 @@
+{% extends "ui/base.html" %}
+
+{% load i18n webdesign humanize %}
+
+{% block title %}{% lorem 3 w random %}{% endblock %}
+
+{% block head %}
+{{ block.super }}
+<script src="http://platform.twitter.com/anywhere.js?id=^_^&v=1" type="text/javascript"></script>
+<script type="text/javascript">
+  twttr.anywhere(function (T) {T.hovercards();});
+</script>
+{% endblock %}
+
+{% block fixed_header %}
+  {% include "ui/header.html" %}
+{% endblock %}
+
+{% block body_script%}
+  $('.row p').popover({'placement': 'bottom'});
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+
+  {% comment %}<a class="btn btn-inverse" href="{% url web.index %}">&larr; {% trans "Atrás" %}</a> {% endcomment %}
+
+  <div class="marketing">
+    <h1>{% trans "Detalles de la oferta" %}</h1>
+    <p class="marketing-byline">{% trans "Trabaja en una empresa joven y dinámica de " %} {{ offer.profile.name }} {% if offer.salary %} {% trans " por " %} {{ offer.salary }} €  {% endif %}</p>
+    <hr class="soften">
+    <div class="row">
+      <div class="span3">
+        <img class="small-bs-icon" src="{{ STATIC_URL }}img/glyphicons/glyphicons_010_envelope.png">
+        <h3>{% trans 'Oferta'%}</h3>
+        </br>
+        <p rel="popover" data-original-title="{% trans 'Oferta'%}" data-content="{{ offer.vacant|safe }}">{{ offer.vacant|safe|truncatewords:15 }}</p>
+      </div>
+      <div class="span3">
+        <img class="small-bs-icon" src="{{ STATIC_URL }}img/glyphicons/glyphicons_198_ok.png">
+        <h3>{% trans 'Compañía'%}</h3>
+        </br>
+        <p rel="popover" data-original-title="{% trans 'Compañía'%}" data-content="{{ offer.company|safe }}">{{ offer.company|safe|truncatewords:15 }}</p>
+      </div>
+      <div class="span3">
+        <img class="small-bs-icon" src="{{ STATIC_URL }}img/glyphicons/glyphicons_266_flag.png">
+        <h3>{% trans 'Población'%}</h3>
+        </br>
+        <p rel="popover" data-original-title="{% trans 'Población'%}" data-content="{{ offer.poblation|safe }}">{{ offer.poblation|safe|truncatewords:15 }}</p>
+      </div>
+      <div class="span3">
+        <img class="small-bs-icon" src="{{ STATIC_URL }}img/glyphicons/glyphicons_322_playing_dices.png">
+        <h3>{% trans 'Descripción'%}</h3>
+        </br>
+        <p rel="popover" data-original-title="{% trans 'Descripción'%}" data-content="{{ offer.description|safe }}">{{ offer.description|safe|truncatewords:15}}</p>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="span3">
+        <img class="small-bs-icon" src="{{ STATIC_URL }}img/glyphicons/glyphicons_321_gamepad.png">
+        <h3>{% trans 'Formación mínima'%}</h3>
+        </br>
+        <p rel="popover" data-original-title="{% trans 'Formación mínima'%}" data-content="{{ offer.min_form|safe }}">{{ offer.min_form|safe|truncatewords:15 }}</p>
+      </div>
+      <div class="span3">
+        <img class="small-bs-icon" src="{{ STATIC_URL }}img/glyphicons/glyphicons_324_tie.png">
+        <h3>{% trans 'Experiencia Mínima'%}</h3>
+        </br>
+        <p rel="popover" data-original-title="{% trans 'Experiencia Mínima'%}" data-content="{{ offer.min_exp|safe }}">{{ offer.min_exp|safe|truncatewords:15 }}</p>
+      </div>
+      <div class="span3">
+        <img class="small-bs-icon" src="{{ STATIC_URL }}img/glyphicons/glyphicons_331_dashboard.png">
+        <h3>{% trans 'Requisitos mínimos'%}</h3>
+        </br>
+        <p rel="popover" data-original-title="{% trans "Oferta de Trabajo" %}" data-content="
+          {% if offer.min_req %}
+            {{ offer.min_req|safe }}
+          {% else %}
+            {% trans "Ser una persona joven y dinámica con ganas de monetizar su tiempo de manera colaborativa" %}
+          {% endif %}">
+          {% if offer.min_req %}
+            {{ offer.min_req|safe|truncatewords:15 }}
+          {% else %}
+            {% trans "Ser una persona joven y dinámica con ganas de monetizar su tiempo de manera colaborativa" %}
+          {% endif %}</p>
+      </div>
+      <div class="span3">
+        <img class="small-bs-icon" src="{{ STATIC_URL }}img/glyphicons/glyphicons_343_thumbs_up.png">
+        <h3>{% trans 'Requisitos deseados'%}</h3>
+        </br>
+        <p rel="popover" data-original-title="{% trans 'Requisitos deseados'%}" data-content="
+          {% if offer.des_req %}
+            {{ offer.des_req|safe }}
+          {% else %}
+            {% trans "Conocimientos en bailes de salón" %}
+          {% endif %}">
+          {% if offer.des_req %}
+            {{ offer.des_req|safe|truncatewords:15 }}
+          {% else %}
+            {% trans "Conocimientos en bailes de salón" %}
+          {% endif %}
+        </p>
+      </div>
+    </div>
+
+    <div class="bs-links">
+      <ul class="quick-links">
+        <li class="tweet-btn">
+          <a href="https://twitter.com/share" class="twitter-share-button" data-via="trabajo_enfurec" data-url="" data-lang="es" data-text="{% trans 'Si te consideras un auténtic@ '%}{{ offer.profile.name }}{% trans ', no lo pienses más: '%}">Tweet</a>
+        </li>
+      </ul>
+    </div>
+    <hr class="soften">
+  </div>
+
+
+  <!-- COMMENTS -->
+  <div class="page-header">
+    <h1>{% trans "Comentarios" %} <small>{% if comments %}{% trans "Hay " %} {{ comments|length }} {% trans " comentarios" %}{% endif %}</small></h1>
+
+  </div>
+  <div class="row">
+      {% for comment in comments %}
+        <div class="span12">
+          <ul class="breadcrumb">
+            <li class="">
+              <img class="small-bs-icon"
+              src="https://api.twitter.com/1/users/profile_image?screen_name={{ comment.user.get_profile.twitter_profile.screen_name }}&size=mini"></img>
+            </li>
+            <li class="">
+              <h5> @{{ comment.user.username }} - {{ comment.date|naturaltime }} </h5>
+            </li>
+            <p>{{ comment.text }}</p>
+          </ul>
+        </div>
+      {% empty %}
+        <div class="span12">
+          {% trans "No hay ningún comentario" %}
+        </div>
+      {% endfor %}
+
+    {% comment %}
+      <div class="span12">
+        <ul class="breadcrumb">
+          <li class=""><img class="small-bs-icon" src="{{ STATIC_URL }}img/glyphicons/{{ tip.icon_name }}.png"></li>
+          <li class=""><h5><a href="">@pepito</a> - Hace 6 horas</h5></li>
+          <!-- <li class=""><a href="#butchery">Carniceras</a></li> -->
+          <li><p>
+          ajksdasjhda aksaksdja dkasjdaskdj asdahsdj daksd askdahs dad asdsasdas dkjasdh akj kasdaks dsak ddkasj das kddsad aksdhsda dkasjda sadas kjdasdjasd kasasksksajd sakdasd sadaskjdas dkasjdas dkasjd
+        </p></li>
+        </ul>
+      </div>
+    {% endcomment %}
+  </div>
+
+  {% if user.is_authenticated %}
+
+    <div class="row">
+      <div class="span12">
+
+      <script type="text/javascript">
+       var RecaptchaOptions = {theme : 'custom', lang : 'es', custom_theme_widget: 'recaptcha_widget'};
+       </script>
+
+      <form class="well form-inline" method="post" action="{% url web.offer.detail offer.id%}">{% csrf_token %}
+
+        <ul class="quick-links">
+          {% if  form.non_field_errors  %}
+            <li class="tweet-btn">
+              <div class="alert alert-error">
+                  {% for error in form.non_field_errors %}
+                      <strong>{% trans '¡Error!' %}</strong>
+                      {{ error|escape }}
+                  {% endfor %}
+              </div>
+            </li>
+          {% endif %}
+
+          {% if form.text.errors %}
+            <li class="tweet-btn">
+              <div class="control-group error">
+                {% comment %}
+                  {% for error in form.text.errors %}
+                    <div class="alert alert-error">
+                       <span class="help-inline">{{ error|escape }}</span> -->
+                    </div>
+                  {% endfor %}
+                 {% endcomment %}
+                  <div class="controls">
+                    {{ form.text }}
+                  </div>
+              </div>
+            </li>
+          {% else %}
+            <li class="tweet-btn">
+              <div class="control-group">
+                <div class="controls">
+                   {{ form.text }}
+                </div>
+              </div>
+            </li>
+          {% endif %}
+
+          <div id="recaptcha_widget" style="display:none">
+              <div class="input-prepend input-append">
+              <div id="recaptcha_image"></div>
+              </br>
+              {% if captcha_response %}
+                <div class="control-group error">
+                <div class="controls">
+                     <input class="span3" type="text" id="recaptcha_response_field" name="recaptcha_response_field"/>
+                  </div>
+                </div>
+              {% else %}
+                <div class="control-group">
+                <div class="controls">
+                     <input class="span3" type="text" id="recaptcha_response_field" name="recaptcha_response_field"/>
+                  </div>
+                </div>
+              {% endif %}
+              <span class="add-on"><a href="javascript:Recaptcha.reload()">{% trans "Obtener otro captcha" %}</a></span>
+            </div>
+          </div>
+        </br>
+        <li class="tweet-btn">
+             <button class="btn btn-large btn-inverse" type="submit">
+                <i class="icon-bullhorn icon-white"></i>{% trans ' Comentar' %}
+              </button>
+          </li>
+        </ul>
+
+        <script type="text/javascript" src="http://www.google.com/recaptcha/api/challenge?k=6LeOnNQSAAAAAIctSrSUs2i2LS0gg7EfG7e6r9JE">
+         </script>
+        <noscript>
+          <iframe src="http://www.google.com/recaptcha/api/noscript?k=6LeOnNQSAAAAAIctSrSUs2i2LS0gg7EfG7e6r9JE"
+              height="250" width="250" frameborder="0"></iframe><br>
+          <textarea name="recaptcha_challenge_field" rows="3" cols="40"></textarea>
+          <input type="hidden" name="recaptcha_response_field" value="manual_challenge">
+        </noscript>
+
+      </form>
+      </div>
+    </div>
+  {% endif %}
+
+  <!-- END COMMENTS -->
+{% endblock %}
+
+{% block jquery_init %}
+{% endblock %}

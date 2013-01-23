@@ -1,0 +1,136 @@
+[
+  {
+    "model": "web.profile",
+    "pk": 1,
+    "fields": {
+      "name": "Becari@ Analista Senior",
+      "code": 1
+    }
+  },
+  {
+    "model": "web.profile",
+    "pk": 2,
+    "fields": {
+      "name": "Becari@ Analista Junior",
+      "code": 2
+    }
+  },
+  {
+    "model": "web.profile",
+    "pk": 3,
+    "fields": {
+      "name": "Craftman Senior",
+      "code": 3
+    }
+  },
+  {
+    "model": "web.profile",
+    "pk": 4,
+    "fields": {
+      "name": "Craftman Junior",
+      "code": 4
+    }
+  },
+
+
+  {
+    "model": "web.Tip",
+    "pk": 1,
+    "fields": {
+      "header": "Empresas jóvenes",
+      "body": "Se trata de empresas jóvenes e innovadoras que usan las técnicas más avanzadas en recruiting de carne fresca.",
+      "priority": 1,
+      "position": 0,
+      "icon_name": "glyphicons_351_book_open"
+    }
+  },
+  {
+    "model": "web.Tip",
+    "pk": 2,
+    "fields": {
+      "header": "Equipo multidisciplinar",
+      "body": "Los equipos técnicos de desarrollo son multidisciplinares: en ellos encontrarás desde psicólogos hasta abogados, pasando por administrativos, estudiantes que empezaron estadística... Todos ellos han recibido una formación específica en management de craftmen.",
+      "priority": 1,
+      "position": 0,
+      "icon_name": "glyphicons_009_magic"
+    }
+  },
+  {
+    "model": "web.Tip",
+    "pk": 3,
+    "fields": {
+      "header": "Perfiles de primer nivel",
+      "body": "Aseguramos un mínimo de un becario analista senior por grupo de trabajo. De esta manera, garantizamos el éxito del proyecto.",
+      "priority": 1,
+      "position": 0,
+      "icon_name": "glyphicons_289_podium"
+    }
+  },
+  {
+    "model": "web.Tip",
+    "pk": 4,
+    "fields": {
+      "header": "Grandes empresas",
+      "body": "Trabaja en proyectos subvencionados. No tiene por qué funcionar, sólo que se pueda justificar. Trabajarás según el estándar mínimo de calidad.",
+      "priority": 1,
+      "position": 1,
+      "icon_name": "glyphicons_155_show_thumbnails"
+    }
+  },
+  {
+    "model": "web.Tip",
+    "pk": 5,
+    "fields": {
+      "header": "Principio de Peter",
+      "header_tooltip": "En una jerarquía, todo empleado tiende a ascender hasta su nivel de incompetencia: la nata sube hasta cortarse",
+      "body": "Este principio es la base de nuestro sinérgico management.",
+      "priority":1,
+      "position": 1,
+      "icon_name": "glyphicons_214_resize_small"
+    }
+  },
+  {
+    "model": "web.Tip",
+    "pk": 6,
+    "fields": {
+      "header": "El empleado siempre en mente",
+      "body": "Si tienes que trabajar de noche, te dejamos encender las luces.",
+      "priority":1,
+      "position": 1,
+      "icon_name": "glyphicons_043_group"
+    }
+  },
+  {
+    "model": "web.Tip",
+    "pk": 7,
+    "fields": {
+      "header": "Zonas para comer y relajarse",
+      "body": "Disponemos de zona de comedor donde podrás degustar una amplia variedad de bananas, con máquinas de vending con bocadillos de atún a precios de mercado. En algunas empresas disfrutarás de salas donde podrás dormir, derrumbarte o llorar.",
+      "priority":1,
+      "position": 2,
+      "icon_name": "glyphicons_082_roundabout"
+    }
+  },
+  {
+    "model": "web.Tip",
+    "pk": 8,
+    "fields": {
+      "header": "Fanboys",
+      "body": "Intentamos que en cada grupo de trabajo, haya un fanboy de Apple y otro de Google. Ambos certificarán que nunca han hecho ninguna aplicación para sus plataformas móviles, pero dispondrán del conocimiento adecuado para llevar a cabo las tareas más complicadas: instalar aplicaciones, leer xatakamovil, etc.",
+      "priority":1,
+      "position": 2,
+      "icon_name": "glyphicons_163_iphone"
+    }
+  },
+  {
+    "model": "web.Tip",
+    "pk": 9,
+    "fields": {
+      "header": "Trepas",
+      "body": "En todo proyecto siempre habrá un trepa de referencia, del cual adquirir nuevos conocimientos y aprender patrones de conducta.",
+      "priority":1,
+      "position": 2,
+      "icon_name": "glyphicons_003_user"
+    }
+  }
+]

@@ -1,0 +1,106 @@
+{% extends "ui/base.html" %}
+
+{% load i18n webdesign %}
+
+{% block title %}{% lorem 3 w random %}{% endblock %}
+
+{% block fixed_header %}
+  {% include "ui/header.html" %}
+{% endblock %}
+
+{% block body_script%}
+  {% comment %}$('.carousel').carousel({interval: 5000}); {% endcomment %}
+  $('#offers-list tbody tr').popover({'placement': 'top', delay: { 'show': 500, 'hide': 150 }});
+  $('#id_header_tooltip').tooltip();
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+
+  <header class="jumbotron masthead">
+    <div class="inner">
+      <h1>{% trans "Trabajo Enfurecido" %}</h1>
+      <p>{% trans "From CEO To Monkeys" %} &reg;</p> <!-- &copy; -->
+    </div>
+
+    <div class="bs-links">
+      <ul class="quick-links">
+        <li class="follow-btn">
+          <a href="https://twitter.com/trabajo_enfurec" class="twitter-follow-button" data-show-count="true" data-lang="es">Follow @trabajo_enfurec</a>
+        </li>
+        <li class="tweet-btn">
+          <a href="https://twitter.com/share" class="twitter-share-button" data-via="trabajo_enfurec" data-url="" data-lang="es" data-text="{% trans "Trabajo Enfurecido: From CEO To Monkeys &reg;" %}">Tweet</a>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <div class="marketing">
+    <h1>{% trans "Uniendo sinergias colaborativas y corporativas con mono-sapiens" %}</h1>
+    <p class="marketing-byline">{% trans "¿Quieres un trabajo corporativo? No busques más." %} </p>
+
+    <div class="row">
+      {% for tip in first_row_tips %}
+        <div class="span4">  {{ tip.img.url }}
+          <img class="bs-icon" src="{{ STATIC_URL }}img/glyphicons/{{ tip.icon_name }}.png">
+          <h2 {% if tip.header_tooltip %}
+                id="id_header_tooltip" rel="tooltip" title="{{ tip.header_tooltip }}"
+              {% endif %}>{{ tip.header }}</h2>
+          <p>{{ tip.body }}</p>
+        </div>
+      {% endfor %}
+    </div><!--/row-->
+    <div class="row">
+      {% for tip in second_row_tips %}
+        <div class="span4">
+          <img class="bs-icon" src="{{ STATIC_URL }}img/glyphicons/{{ tip.icon_name }}.png">
+          <h2 {% if tip.header_tooltip %}
+                id="id_header_tooltip" rel="tooltip" title="{{ tip.header_tooltip }}"
+              {% endif %}>{{ tip.header }}</h2>
+          <p>{{ tip.body }}</p>
+        </div>
+      {% endfor %}
+    </div><!--/row-->
+    <div class="row">
+      {% for tip in third_row_tips %}
+        <div class="span4">
+          <img class="bs-icon" src="{{ STATIC_URL }}img/glyphicons/{{ tip.icon_name }}.png">
+          <h2 {% if tip.header_tooltip %}
+                id="id_header_tooltip" rel="tooltip" title="{{ tip.header_tooltip }}"
+              {% endif %}>{{ tip.header }}</h2>
+          <p>{{ tip.body }}</p>
+        </div>
+      {% endfor %}
+    </div><!--/row-->
+
+    <hr class="soften">
+  </div>
+
+  <section id="offers">
+    <div class="row-fluid">
+      {% include "web/sections/offers.html" %}</div>
+  </section>
+
+{% endblock %}
+
+{% block jquery_init %}
+
+$('#offers-list tbody tr').live('click', function(event){
+  var id_offer = $(this).attr('data-id');
+  window.location = '/offers/' + id_offer;
+});
+
+$('.navbar li').live('click', function(e) {
+  $('.navbar li').removeClass('active');
+  var $this = $(this);
+  if (!$this.hasClass('active')) {
+    $this.addClass('active');
+  }
+});
+
+$('[data-spy="scroll"]').each(function () {
+  var $spy = $(this).scrollspy('refresh')
+});
+
+{% endblock %}

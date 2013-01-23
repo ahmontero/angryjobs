@@ -1,0 +1,76 @@
+{% load i18n web_tag %}
+
+{% match_url "web.index" as web_index %}
+{% match_url "web.offer.detail" as web_offer_detail %}
+
+<div class="navbar-inner">
+  <div class="container-fluid">
+    <ul class="nav nav-pills">
+
+      {% if web_index %}
+        <li class="active"><a href="{% url web.index %}">{% trans "Inicio" %}</a></li>
+        <li class=""><a href="{% url web.index %}#offers">{% trans "Ofertas de Trabajo" %}</a></li>
+      {% else %}
+         {% if web_offer_detail %}
+          <li class=""><a href="{% url web.index %}">{% trans "Inicio" %}</a></li>
+          <li class="active"><a href="{% url web.index %}#offers">{% trans "Ofertas de Trabajo" %}</a></li>
+         {% endif %}
+      {% endif %}
+
+        <!-- <li class=""><a href="#butchery">{% trans "Carniceras" %}</a></li> -->
+    </ul>
+
+    <ul class="nav nav-pills pull-right">
+      {% if user.is_authenticated %}
+        <li class="active"><a>{% trans "Hola" %} @{{ user.username }}</a></li>
+        <li class=""><a href="{% url web.logout %}">{% trans "Logout" %}</a></li>
+      {% else %}
+        <li class="">
+          <a href="{% url twitter_begin_auth %}">
+            <img src="{{ STATIC_URL }}img/sign-in-with-twitter-l.png" alt="twitter-login"></img>
+          </a>
+        </li>
+      {% endif %}
+    </ul>
+
+    {% comment %}
+
+    {% if not user.is_authenticated %}
+        <li class="active">
+          <a href="{% url twitter_begin_auth %}">
+            <img src="{{ STATIC_URL }}img/sign-in-with-twitter-l.png" alt="twitter-login"/>
+          </a>
+        </li>
+      {% else %}
+        <li class="dropdown">
+          <a href="#"
+                class="dropdown-toggle"
+                data-toggle="dropdown">
+                Usuario
+                <b class="caret"></b>
+          </a>
+          <ul class="dropdown-menu">
+            <li class=""><a href="{% url web.offers %}">{% trans "Comentar" %}</a></li>
+            <li class="divider"></li>
+            <li class=""><a href="{% url web.logout %}">{% trans "Salir" %}</a></li>
+          </ul>
+        </li>
+      {% endif %}
+
+
+    <div class="btn-group pull-right">
+        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+          <i class="icon-user"></i> {% trans "Acceso candidat@s" %}
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="#">{% trans "Becari@ Analista" %}</a></li>
+          <li class="divider"></li>
+          <li><a href="#">{% trans "Craftman Wannabe" %}</a></li>
+          <li class="divider"></li>
+          <li><a href="#">{% trans "Smoke Sales" %}</a></li>
+        </ul>
+    </div>
+  {% endcomment %}
+  </div>
+</div>
