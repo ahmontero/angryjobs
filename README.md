@@ -59,6 +59,13 @@ Run server
     5.  django-admin.py syncdb --pythonpath='angryjobs' --settings=angryjobs.settings.local
     6.  django-admin.py runserver --pythonpath='angryjobs' --settings=angryjobs.settings.local
 
+Configure API user
+    7. Go to http://127.0.0.1:8000/admin/tastypie/apikey/ and add an api key.
+
+Set the environments variables :
+    8. export TE_API_USER=<username>
+    9. export TE_API_KEY=<api_key>
+
 Fetch data and save into app
 
-    7.  python updater/fetch_data.py
+    10.  python updater/fetch_data.py
