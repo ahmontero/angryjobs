@@ -3,6 +3,8 @@
 
 from os import environ
 
+import dj_database_url
+
 from base import *
 
 
@@ -23,16 +25,10 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 ########## DATABASE CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': '',
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',
-        'PORT': '',
-    }
-}
+DATABASES = {}
+
+# Parse database configuration from $DATABASE_URL
+DATABASES['default'] = dj_database_url.config()
 ########## END DATABASE CONFIGURATION
 
 
@@ -46,23 +42,7 @@ CACHES = {
 ########## END CACHE CONFIGURATION
 
 
-########## TOOLBAR CONFIGURATION
-# See: https://github.com/django-debug-toolbar/django-debug-toolbar#installation
-INSTALLED_APPS += (
-    'debug_toolbar',
-)
-
-# See: https://github.com/django-debug-toolbar/django-debug-toolbar#installation
-INTERNAL_IPS = ('127.0.0.1',)
-
-# See: https://github.com/django-debug-toolbar/django-debug-toolbar#installation
-MIDDLEWARE_CLASSES += (
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
-)
-########## END TOOLBAR CONFIGURATION
-
-
-########## django-twitter CONFIGURATION
+########## DJANGO-TWITTER CONFIGURATION
 GLOBAL_PWD = environ.get('TE_GLOBAL_PWD', '')
 
 LOGIN_REDIRECT_URL = 'http://domain.com'
@@ -73,7 +53,7 @@ AUTH_PROFILE_MODULE = 'web.UserProfile'
 
 CONSUMER_KEY = environ.get('TE_CONSUMER_KEY', '')
 CONSUMER_SECRET = environ.get('TE_CONSUMER_SECRET', '')
-########## END django-twitter CONFIGURATION
+########## END DJANGO-TWITTER CONFIGURATION
 
 
 ########## API CONFIGURATION
@@ -81,7 +61,7 @@ API_USER = environ.get('TE_API_USER', '')
 API_KEY = environ.get('TE_API_KEY', '')
 ########## END API CONFIGURATION
 
-########## captcha CONFIGURATION
+########## CAPTCHA CONFIGURATION
 CAPTCHA_PUBLIC_KEY = environ.get('TE_CAPTCHA_PUBLIC_KEY', '')
 CAPTCHA_PRIVATE_KEY = environ.get('TE_CAPTCHA_PRIVATE_KEY', '')
-########## END captcha CONFIGURATION
+########## END CAPTCHA CONFIGURATION

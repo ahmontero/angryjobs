@@ -5,7 +5,6 @@ from os.path import abspath, basename, dirname, join, normpath
 from sys import path
 
 
-
 ########## PATH CONFIGURATION
 # Absolute filesystem path to the Django project directory:
 DJANGO_ROOT = dirname(dirname(abspath(__file__)))
@@ -83,20 +82,20 @@ USE_TZ = True
 MEDIA_ROOT = normpath(join(DJANGO_ROOT, 'media'))
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#media-url
-MEDIA_URL = ''
+MEDIA_URL = '/media/'
 ########## END MEDIA CONFIGURATION
 
 
 ########## STATIC FILE CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-root
-STATIC_ROOT = normpath(join(join(DJANGO_ROOT,'..'), 'assets'))
+STATIC_ROOT = normpath(join(join(DJANGO_ROOT, '..'), 'assets'))
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#static-url
 STATIC_URL = '/static/'
 
 # See: https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
 STATICFILES_DIRS = (
-    normpath(join(join(DJANGO_ROOT,'..'), 'static')),
+    normpath(join(join(DJANGO_ROOT, '..'), 'static')),
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#staticfiles-finders
@@ -143,7 +142,7 @@ TEMPLATE_LOADERS = (
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-dirs
 TEMPLATE_DIRS = (
-    normpath(join(join(DJANGO_ROOT,'..'), 'templates')),
+    normpath(join(join(DJANGO_ROOT, '..'), 'templates')),
 )
 ########## END TEMPLATE CONFIGURATION
 

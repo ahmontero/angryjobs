@@ -3,7 +3,6 @@ django
 django-tastypie
 django-twitter
 gunicorn
-honcho
 lxml
 psycopg2
 recaptcha-client
