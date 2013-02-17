@@ -1,1 +1,1 @@
-web: gunicorn -c gunicorn.prod.conf angryjobs.wsgi
+web: gunicorn -c gunicorn.prod.conf --pythonpath='angryjobs' angryjobs.wsgi:application
