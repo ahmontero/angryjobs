@@ -1,17 +1,18 @@
 # -*- encoding: utf-8 -*-
 
-
 import os
+
 
 class ImproperlyConfigured(Exception):pass
 
+
 def get_env_variable(var_name):
-      """ Get the environment variable or return exception """
-      try:
-            return os.environ[var_name]
-      except KeyError:
-            error_msg = "Set %s env variable" % var_name
-            raise ImproperlyConfigured(error_msg)
+    """ Get the environment variable or return exception """
+    try:
+        return os.environ[var_name]
+    except KeyError:
+        error_msg = "Set %s env variable" % var_name
+        raise ImproperlyConfigured(error_msg)
 
 SOURCE = 'infojobs'
 URL = 'http://www.infojobs.net/ofertas-trabajo/informatica-telecomunicaciones/'

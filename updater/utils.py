@@ -1,6 +1,5 @@
 # -*- encoding: utf-8 -*-
 
-
 from bs4 import BeautifulSoup
 import itertools
 import re
@@ -68,7 +67,7 @@ class IJParser(object):
         #table_results_highlighted = soup.body.find_all(
         #    id='table_results_destacadas')
         soup = self.get_soup()
-        tables = soup.body.find_all('table')
+        tables = soup.body.find_all('table', {'id': 'table_results'})
 
         if len(tables) == 1:
             standard_offers = self.parse_offer(tables[0])
@@ -160,7 +159,6 @@ class IJParser(object):
 
         if 'poblation' in offer.keys() and 'vacant' in offer.keys() \
             and 'date' in offer.keys():
-
             ooffer = Offer()
             ooffer.url = offer['vacant']['link']
             ooffer.vacant = offer['vacant']['name']

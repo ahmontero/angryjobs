@@ -1,6 +1,5 @@
 # -*- encoding: utf-8 -*-
 
-
 import simplejson as json
 import urllib2
 
@@ -26,7 +25,7 @@ def main():
     print '>>> Nº Banners: %s' % len(banners)
     objects_added = 0
     for banner in banners:
-        banner_api_url = URL + API + 'banner' + CONF
+        banner_api_url = '%s%sbanner%s' % (URL, API, CONF)
         json_post = json.dumps({"url": banner})
         http_req = urllib2.Request(banner_api_url, json_post, {
             'Content-Type': 'application/json',
@@ -40,7 +39,7 @@ def main():
     print '>>> Nº Companies: %s' % len(companies)
     objects_added = 0
     for key, company in companies.items():
-        company_api_url = URL + API + 'company' + CONF
+        company_api_url = '%s%scompany%s' % (URL, API, CONF)
 
         json_post = json.dumps({
             "source": company['source'],
@@ -60,7 +59,7 @@ def main():
     print '>>> Nº Premium offers: %s' % len(premium_offers)
     objects_added = 0
     for offer in premium_offers:
-        company_api_url = URL + API + 'offer' + CONF
+        company_api_url = '%s%soffer%s' % (URL, API, CONF)
 
         company = get_company(offer.company_cid)
         if company:
@@ -96,7 +95,7 @@ def main():
     print '>>> Nº Standard offers: %s' % len(standard_offers)
     objects_added = 0
     for offer in standard_offers:
-        company_api_url = URL + API + 'offer' + CONF
+        company_api_url = '%s%soffer%s' % (URL, API, CONF)
 
         company = get_company(offer.company_cid)
         if company:
@@ -131,7 +130,7 @@ def main():
 
 
 def get_company(company_cid):
-    api_url = URL + API + 'company' + CONF + '&limit=0'
+    api_url = '%s%scompany%s&limit=0' % (URL, API, CONF)
     http_req = urllib2.Request(api_url,
         headers={'ACCEPT': 'application/json, text/html'})
     try:
@@ -158,21 +157,17 @@ def send_data(http_req):
         else:
             return False
 
-        #print response.read()
-        #print response.getcode()
-        #print response.info()
-        #print response.msg
-    except Exception:
-        return False
-    """
+        print response.read()
+        print response.getcode()
+        print response.info()
+        print response.msg
+
     except urllib2.HTTPError as he:
         print he.getcode()
         print he.info()
         print he.msg
     except urllib2.URLError as ue:
         print ue
-    """
-
 
 if __name__ == "__main__":
     main()

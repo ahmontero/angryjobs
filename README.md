@@ -63,6 +63,15 @@ Configure API user
 
     7.  Go to http://127.0.0.1:8000/admin/tastypie/apikey/ and add an api key.
 
+    The api user needs to have the permissions configured properly:
+
+        web | company | Can add company
+        web | company | Can change company
+        web | company | Can delete company
+        web | offer   | Can add offer
+        web | offer   | Can change offer
+        web | offer   | Can delete offer
+
 Set the environments variables
 
     8.  export TE_API_USER=<username>
